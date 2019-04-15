@@ -84,7 +84,8 @@ Você pode fazer três tipos de consulta pelo endereço<br>
 <b>*obs: caso queira que sua busca contenha mais de uma cidade, passe seus nomes separados por "&"</b> <br>
 
 Exemplos:<br>
->http:<i></i>//localhost:3000/stores/lista/RS<br>
+>http:<i></i>//localhost:3000/stores/lista/<br>
+http:<i></i>//localhost:3000/stores/lista/RS<br>
 http:<i></i>//localhost:3000/stores/lista/RS/Rio Grande<br>
 http:<i></i>//localhost:3000/stores/lista/RS/Rio Grande&Pelotas<br>
 
