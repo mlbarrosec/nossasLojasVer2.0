@@ -81,7 +81,7 @@ Você pode fazer três tipos de consulta pelo endereço<br>
 -http://localhost:3000/stores/lista (Aqui irá listar todas as lojas)<br>
 -http://localhost:3000/stores/lista/state (Aqui irá listar todas as lojas de um determinado estado<br>
 -http://localhost:3000/stores/lista/state/city (Aqui irá listar todas as lojas de um estado e de uma cidade)<br>
-*obs: caso queira que sua busca contenha mais de uma cidade, passe seus nomes separados por & <br>
+<b>*obs: caso queira que sua busca contenha mais de uma cidade, passe seus nomes separados por "&"</b> <br>
 
 Exemplos:<br>
 >http:<i></i>//localhost:3000/stores/lista/RS<br>
