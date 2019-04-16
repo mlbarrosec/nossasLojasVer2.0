@@ -49,6 +49,35 @@ module.exports = function(app) {
 
     });
 
+    app.post('/stores/lista', function (req, res){
+
+        var errors = req.validationErrors();
+        if(errors) {
+            console.log("Erros de validação encontrados");
+            res.status(400).send(errors);
+            return;
+        }
+
+        var list = req.body;
+
+        //Cria a conexão com o banco de dados
+        var connection = app.persistencia.ConnectionConfig();
+        var storeDAO = new app.persistencia.StoreDAO(connection);
+
+        storeDAO.listStores(list,function(error, result){
+            if(error){
+                console.log("Error insertion data base " + error);
+                res.status(500).send(error);
+            }else{
+                console.log("Lojas encontradas");
+                res.send(result);
+                //res.status(201).json(list)
+            }
+        });
+
+
+    });
+
 
     // Metodo PUT para atualizar os dados pasando
     app.put("/stores/store/:id", function(req,res){
@@ -123,43 +152,39 @@ module.exports = function(app) {
     
     });
 
+    
 
     //Metodo GET para busca por estado e cidade
-    app.get("/stores/lista/:state?/:city?", function(req, res){
-               
-        var city = req.params.city;
-        var state = req.params.state;        
+    /*
+        app.get("/stores/lista/:state?/:city?", function(req, res){
+                
+            var city = req.params.city;
+            var state = req.params.state;        
 
-        if(city != undefined){
-            resposta = city.replace("&","-");
-            var cityes = resposta.split("-");
-            
-        }
+            if(city != undefined){
+                resposta = city.replace("&","-");
+                var cityes = resposta.split("-");            
+            }
+            var connection = app.persistencia.ConnectionConfig();
+            var storeDAO = new app.persistencia.StoreDAO(connection);
 
-        /*
-            console.log(cityes[0]);
-            console.log(cityes[1]);
-            console.log(state);
-        */
-        var connection = app.persistencia.ConnectionConfig();
-        var storeDAO = new app.persistencia.StoreDAO(connection);
-
-        storeDAO.listStores(state, cityes, function(error,result){
-            if(error){
-                res.status(500).send(error);
-                return;
-            }else{
-                //Caso não encontre resultado na busca, retorna ao usuario 
-                //que não encontrou
-                if(result == ""){
-                    res.send("Loja não localizada");
+            storeDAO.listStores(state, cityes, function(error,result){
+                if(error){
+                    res.status(500).send(error);
                     return;
                 }else{
-                    res.send(result);
-                    return;
+                    //Caso não encontre resultado na busca, retorna ao usuario 
+                    //que não encontrou
+                    if(result == ""){
+                        res.send("Loja não localizada");
+                        return;
+                    }else{
+                        res.send(result);
+                        return;
+                    }
                 }
-            }
+            });
         });
-    });
+    */
 
 }

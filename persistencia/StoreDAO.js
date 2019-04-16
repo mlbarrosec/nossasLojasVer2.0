@@ -20,19 +20,36 @@ StoreDAO.prototype.searchForID = function(id,callback){
     this._connection.query("SELECT * FROM stores where id = ?",[id],callback);
 }
 
-StoreDAO.prototype.listStores = function(state,cityes,callback){    
+StoreDAO.prototype.listStores = function(list,callback){
+    /*console.log(list.cityes);
+    var stringJson = JSON.stringify(list.cityes);
+    console.log(stringJson);
+    */
    
-    //Esse conjunto de if definem a query que deve ser feita de acordo 
-    //como que campos foram preenchidos na requisição.
-    if(cityes == undefined && state == undefined){
-        this._connection.query("SELECT * FROM stores",callback);
-    }else if (state != undefined && cityes == undefined){
-        this._connection.query("SELECT * FROM stores WHERE state = ? ", state, callback);
-    }else if(state != undefined && cityes != undefined){       
-
-        this._connection.query("SELECT * FROM stores WHERE state = ? AND city in (?)",[state, cityes],callback);
+    if(list.state == undefined && list.cityes == undefined){
+        this._connection.query("SELECT * FROM stores",callback);        
+    }else if(list.state != undefined && list.cityes == undefined){
+        this._connection.query("SELECT * FROM stores WHERE state = ?",[list.state],callback);        
+    }else if(list.state != undefined && list.cityes != undefined){
+        this._connection.query ("SELECT * FROM stores WHERE state = ? AND city in (?)",[list.state,list.cityes],callback);        
     }
 }
+
+/*
+    StoreDAO.prototype.listStores = function(state,cityes,callback){
+        
+        if(cityes == undefined && state == undefined){
+            this._connection.query("SELECT * FROM stores",callback);
+        }else if (state != undefined && cityes == undefined){
+            this._connection.query("SELECT * FROM stores WHERE state = ? ", state, callback);
+        }else if(state != undefined && cityes != undefined){
+            this._connection.query("SELECT * FROM stores WHERE state = ? AND city in (?)",[state, cityes],callback);
+        }
+
+        //Esse conjunto de if definem a query que deve ser feita de acordo 
+        //como que campos foram preenchidos na requisição.
+    }
+*/
 
 module.exports = function(){
     return StoreDAO;
