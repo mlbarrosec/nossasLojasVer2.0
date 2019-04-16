@@ -77,7 +77,7 @@ Ao executar a requisição do tipo GET pelo postman, você receberá os dados da
 Requisição tipo: POST
 Endereço: http://localhost:3000/stores/lista
 
-Para consultar as lojas você deve passar no corpo da requisição os parametros a serem buscados<br>
+*Para consultar as lojas você deve passar no corpo da requisição os parametros a serem buscados<br>
 
 >{<br>
 	"state":"A",<br>
@@ -90,7 +90,7 @@ Para consultar as lojas você deve passar no corpo da requisição os parametros
 	"state":"A"<br>
 }<br>
 
-E caso queira buscar todas as lojas não passe nada no corpo da requisição<br>
+*E caso queira buscar todas as lojas não passe nada no corpo da requisição<br>
 
 
 ## Configuração do Banco de dados
