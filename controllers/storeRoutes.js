@@ -22,8 +22,15 @@ module.exports = function(app) {
         
         var errors = req.validationErrors();
         if(errors) {
-            console.log("Erros de validação encontrados");
-            res.status(400).send(errors);
+            let saidaErro = {
+                "errorCode":"400",
+                "msg": errors
+            }         
+            res.status(400).send(saidaErro);
+            console.log(saidaErro);
+
+            /*console.log("Erros de validação encontrados");*/
+           // 
             return;
         }
 
@@ -37,12 +44,15 @@ module.exports = function(app) {
 
         storeDAO.save(store, function (erro, resultado){
             if(erro){
-                console.log("Erro ao inserir no banco: " + erro);
-                res.status(500).send(erro);
+                var saidaErro = {
+                    "errorCode":"500",
+                    "msg":"Erro Interno no servidor"
+                }  
+                res.status(500).send(saidaErro);
+                console.log(saidaErro);
             }else{
                 console.log('Loja Cadastrada');
                 res.location('/stores/store/' + resultado.insertId);
-
                 res.status(201).json(store);
             }            
         });
@@ -59,15 +69,23 @@ module.exports = function(app) {
         }
 
         var list = req.body;
-
         //Cria a conexão com o banco de dados
         var connection = app.persistencia.ConnectionConfig();
         var storeDAO = new app.persistencia.StoreDAO(connection);
 
         storeDAO.listStores(list,function(error, result){
             if(error){
-                console.log("Error insertion data base " + error);
-                res.status(500).send(error);
+                
+                var saidaErro = {
+                    "errorCode":"500",
+                    "msg":"Erro Interno no servidor"
+                }  
+                res.status(500).send(saidaErro);
+                console.log(saidaErro);
+
+                return;
+                /*console.log("Error insertion data base " + error);
+                res.status(500).send(error);*/
             }else{
                 console.log("Lojas encontradas");
                 res.send(result);
@@ -90,8 +108,12 @@ module.exports = function(app) {
 
         storeDAO.update(store, function(erro){
             if(erro){
-                res.status(500).send(erro);
-                return;
+                var saidaErro = {
+                    "errorCode":"500",
+                    "msg":"Erro Interno no servidor"
+                }  
+                res.status(500).send(saidaErro);
+                console.log(saidaErro);
             }else{
                 console.log('Loja atualizada');
                 //res.send(store);
@@ -115,7 +137,12 @@ module.exports = function(app) {
 
         storeDAO.delete(store, function(erro){
             if(erro){
-                res.status(500).send(erro);
+                var saidaErro = {
+                    "errorCode":"500",
+                    "msg":"Erro Interno no servidor"
+                }  
+                res.status(500).send(saidaErro);
+                console.log(saidaErro);res.status(500).send(erro);
                 return;
             }else{
                 console.log('Loja deletada');
@@ -136,12 +163,22 @@ module.exports = function(app) {
 
         storeDAO.searchForID(id, function(error,result){
             if(error){
-                res.status(500).send(error);
+                var saidaErro = {
+                    "errorCode":"500",
+                    "msg":"Erro Interno no servidor"
+                }  
+                res.status(500).send(saidaErro);
+                console.log(saidaErro);
                 return;
             }else{
                 //Caso naõ encontre retorna um erro ao usuário
                 if(result == ""){
-                    res.send("Loja não encontrada");
+                    let saidaErro = {
+                        "errorCode":"204",
+                        "msg":"Loja não encontrada"
+                    }  
+                    res.send(saidaErro);
+                    console.log(saidaErro);                    
                 }else{
                     console.log('Loja Encontada'+ JSON.stringify(result));
                     res.send(result);
