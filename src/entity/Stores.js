@@ -48,4 +48,3 @@ Stores = __decorate([
     typeorm_1.Entity()
 ], Stores);
 exports.Stores = Stores;
-//# sourceMappingURL=Stores.js.map

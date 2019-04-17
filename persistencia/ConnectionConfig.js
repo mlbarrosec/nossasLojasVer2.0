@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var configs = require('../configs.json');
+var configs = require('../config/configs.json');
 //function fopr create conection db connection
 function createDBConnection(){
     return mysql.createConnection({

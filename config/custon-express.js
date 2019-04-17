@@ -17,6 +17,7 @@ module.exports = function() { //esse modulo exporta a variavel app com express e
     consign()
         .include('controllers') //include de folder controllers
         .then('persistencia')
+        .then('src')
         .into(app);
     
     return app;

@@ -6,9 +6,10 @@
       "outDir": "./src",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "allowSyntheticDefaultImports" : true,
       "resolveJsonModule": true,
       "esModuleInterop": true,
+      
    }
 }

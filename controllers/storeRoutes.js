@@ -28,34 +28,15 @@ module.exports = function(app) {
             }         
             res.status(400).send(saidaErro);
             console.log(saidaErro);
-
-            /*console.log("Erros de validação encontrados");*/
-           // 
             return;
         }
-
-        //store recebe o corpo json da requisição
-        //utiliza-se aqui a api body-parser
+        
         var store = req.body;
-       
-        //Cria a conexão com o banco de dados
-        var connection = app.persistencia.ConnectionConfig();
-        var storeDAO = new app.persistencia.StoreDAO(connection);
 
-        storeDAO.save(store, function (erro, resultado){
-            if(erro){
-                var saidaErro = {
-                    "errorCode":"500",
-                    "msg":"Internal server error"
-                }  
-                res.status(500).send(saidaErro);
-                console.log(saidaErro);
-            }else{
-                console.log('Loja Cadastrada');
-                res.location('/stores/store/' + resultado.insertId);
-                res.status(201).json(store);
-            }            
-        });
+        var connection = new app.src.DataBaseAdmin();
+        connection.insertDb(store);
+                    
+        
 
     });
 
@@ -188,40 +169,4 @@ module.exports = function(app) {
         })
     
     });
-
-    
-
-    //Metodo GET para busca por estado e cidade
-    /*
-        app.get("/stores/lista/:state?/:city?", function(req, res){
-                
-            var city = req.params.city;
-            var state = req.params.state;        
-
-            if(city != undefined){
-                resposta = city.replace("&","-");
-                var cityes = resposta.split("-");            
-            }
-            var connection = app.persistencia.ConnectionConfig();
-            var storeDAO = new app.persistencia.StoreDAO(connection);
-
-            storeDAO.listStores(state, cityes, function(error,result){
-                if(error){
-                    res.status(500).send(error);
-                    return;
-                }else{
-                    //Caso não encontre resultado na busca, retorna ao usuario 
-                    //que não encontrou
-                    if(result == ""){
-                        res.send("Loja não localizada");
-                        return;
-                    }else{
-                        res.send(result);
-                        return;
-                    }
-                }
-            });
-        });
-    */
-
 }
