@@ -46,7 +46,7 @@ module.exports = function(app) {
             if(erro){
                 var saidaErro = {
                     "errorCode":"500",
-                    "msg":"Erro Interno no servidor"
+                    "msg":"Internal server error"
                 }  
                 res.status(500).send(saidaErro);
                 console.log(saidaErro);
@@ -78,7 +78,7 @@ module.exports = function(app) {
                 
                 var saidaErro = {
                     "errorCode":"500",
-                    "msg":"Erro Interno no servidor"
+                    "msg":"Internal server error"
                 }  
                 res.status(500).send(saidaErro);
                 console.log(saidaErro);
@@ -87,7 +87,7 @@ module.exports = function(app) {
                 /*console.log("Error insertion data base " + error);
                 res.status(500).send(error);*/
             }else{
-                console.log("Lojas encontradas");
+                console.log("Store founded");
                 res.send(result);
                 //res.status(201).json(list)
             }
@@ -110,12 +110,12 @@ module.exports = function(app) {
             if(erro){
                 var saidaErro = {
                     "errorCode":"500",
-                    "msg":"Erro Interno no servidor"
+                    "msg":"Internal server error"
                 }  
                 res.status(500).send(saidaErro);
                 console.log(saidaErro);
             }else{
-                console.log('Loja atualizada');
+                console.log('Store updated');
                 //res.send(store);
                 res.status(201).json(store);
 
@@ -139,13 +139,13 @@ module.exports = function(app) {
             if(erro){
                 var saidaErro = {
                     "errorCode":"500",
-                    "msg":"Erro Interno no servidor"
+                    "msg":"Internal server error"
                 }  
                 res.status(500).send(saidaErro);
                 console.log(saidaErro);res.status(500).send(erro);
                 return;
             }else{
-                console.log('Loja deletada');
+                console.log('Store deleted');
                 res.send(store)
                 res.status(204).json(store);
             }
@@ -165,7 +165,7 @@ module.exports = function(app) {
             if(error){
                 var saidaErro = {
                     "errorCode":"500",
-                    "msg":"Erro Interno no servidor"
+                    "msg":"Internal server error"
                 }  
                 res.status(500).send(saidaErro);
                 console.log(saidaErro);
@@ -175,7 +175,7 @@ module.exports = function(app) {
                 if(result == ""){
                     let saidaErro = {
                         "errorCode":"204",
-                        "msg":"Loja não encontrada"
+                        "msg":"Store Found"
                     }  
                     res.send(saidaErro);
                     console.log(saidaErro);                    
