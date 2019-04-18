@@ -17,9 +17,7 @@ const connection = createConnection({
 });
 
 
-export class DataBaseAdmin{  
-    
-    
+export class DataBaseAdmin{
     
     insertStoreDb(body:any, res:any): void {
 
