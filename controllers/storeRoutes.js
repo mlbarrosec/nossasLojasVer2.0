@@ -34,9 +34,8 @@ module.exports = function(app) {
         var store = req.body;
 
         var connection = new app.src.DataBaseAdmin();
-        connection.insertDb(store);
-                    
-        
+        connection.insertStoreDb(store, res);     
+       
 
     });
 
@@ -80,58 +79,22 @@ module.exports = function(app) {
 
     // Metodo PUT para atualizar os dados pasando
     app.put("/stores/store/:id", function(req,res){
-        var store = req.body;       
-        var id = req.params.id;
-        store.id = id;
+        let store = req.body;       
+        let id = req.params.id;
+        //store.id = id;
 
-        var connection = app.persistencia.ConnectionConfig();
-        var storeDAO = new app.persistencia.StoreDAO(connection);
-
-        storeDAO.update(store, function(erro){
-            if(erro){
-                var saidaErro = {
-                    "errorCode":"500",
-                    "msg":"Internal server error"
-                }  
-                res.status(500).send(saidaErro);
-                console.log(saidaErro);
-            }else{
-                console.log('Store updated');
-                //res.send(store);
-                res.status(201).json(store);
-
-            }
-        });
-
+        let connection = new app.src.DataBaseAdmin();
+        connection.updateStoreDb(id,store, res);
     });
 
     //Metodo para deletar loja por ID
     app.delete("/stores/store/:id", function (req,res){
-        var store = {}
-
+        //let store = {}
         //Pega o ID do parametro da requisição
-        var id = req.params.id;
-        store.id = id;
-        
-        var connection = app.persistencia.ConnectionConfig();
-        var storeDAO = new app.persistencia.StoreDAO(connection);
-
-        storeDAO.delete(store, function(erro){
-            if(erro){
-                var saidaErro = {
-                    "errorCode":"500",
-                    "msg":"Internal server error"
-                }  
-                res.status(500).send(saidaErro);
-                console.log(saidaErro);res.status(500).send(erro);
-                return;
-            }else{
-                console.log('Store deleted');
-                res.send(store)
-                res.status(204).json(store);
-            }
-        })
-
+        let id = req.params.id;
+        //store.id = id;
+        let connection = new app.src.DataBaseAdmin();
+        connection.deleteStoreDb(id,res);
     });
 
     // Metodo GET para busca por ID
