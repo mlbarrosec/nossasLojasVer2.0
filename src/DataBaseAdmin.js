@@ -15,20 +15,22 @@ require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const Stores_1 = require("./entity/Stores");
 const configs_json_1 = __importDefault(require("./config/configs.json"));
+const connection = typeorm_1.createConnection({
+    type: "mysql",
+    host: configs_json_1.default.host,
+    port: 3306,
+    username: configs_json_1.default.user,
+    password: configs_json_1.default.password,
+    database: configs_json_1.default.database,
+    entities: [
+        Stores_1.Stores
+    ],
+    synchronize: true,
+});
 class DataBaseAdmin {
     insertStoreDb(body, res) {
-        typeorm_1.createConnection({
-            type: "mysql",
-            host: configs_json_1.default.host,
-            port: 3306,
-            username: configs_json_1.default.user,
-            password: configs_json_1.default.password,
-            database: configs_json_1.default.database,
-            entities: [
-                Stores_1.Stores
-            ],
-            synchronize: true,
-        }).then((connection) => __awaiter(this, void 0, void 0, function* () {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
             let stores = new Stores_1.Stores();
             stores.name = body.name;
             stores.address = body.address;
@@ -54,18 +56,8 @@ class DataBaseAdmin {
         });
     }
     updateStoreDb(id, body, res) {
-        typeorm_1.createConnection({
-            type: "mysql",
-            host: configs_json_1.default.host,
-            port: 3306,
-            username: configs_json_1.default.user,
-            password: configs_json_1.default.password,
-            database: configs_json_1.default.database,
-            entities: [
-                Stores_1.Stores
-            ],
-            synchronize: true,
-        }).then((connection) => __awaiter(this, void 0, void 0, function* () {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
             //coloca todas as lojas na variavel allStores
             let allStores = connection.getRepository(Stores_1.Stores);
             let storeToAtualize = yield allStores.findOne(id);
@@ -89,18 +81,8 @@ class DataBaseAdmin {
         });
     }
     deleteStoreDb(id, res) {
-        typeorm_1.createConnection({
-            type: "mysql",
-            host: configs_json_1.default.host,
-            port: 3306,
-            username: configs_json_1.default.user,
-            password: configs_json_1.default.password,
-            database: configs_json_1.default.database,
-            entities: [
-                Stores_1.Stores
-            ],
-            synchronize: true,
-        }).then((connection) => __awaiter(this, void 0, void 0, function* () {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
             let allStores = connection.getRepository(Stores_1.Stores);
             let storeToRemove = yield allStores.findOne(id);
             yield allStores.remove(storeToRemove);
