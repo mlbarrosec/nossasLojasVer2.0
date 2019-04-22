@@ -4,7 +4,7 @@ Repositório da API REST para e-comerce "Minhas Lojas", utilizando Node e Banco 
 ## Descrição
 Essa aplicação tem como objetivo principal implementar um API REST, utilizando node.js e banco de dados MYSQL, responsavel por manilular 
 informações de lojas físicas de um ecomerce.
-Essa API deve ser capaz de cadastrar, editarm deletar, recuperar, listar e filtrar as lojas cadastradas em um banco.
+Essa API deve ser capaz de cadastrar, editarm deletar, recuperar, listar e filtrar as lojas cadastradas em um banco. Nessa versão da aplicação esta sendo utilizado a api Typeorm para abstração de banco de dados, e a linguaguem de programação typescript para implementação da mesma.
 
 ## APIs Node Utilizadas
 Para desenvolvimento da aplicação foi utilizada as seguistes APIs.
@@ -18,6 +18,18 @@ Pelo prompt do node, você deve estar localizado na pasta local da sua aplicaç�
 -Express-Validator 4.3.1 (npm install express-validator --save)<br>
 -Mysql 2.16.0 (npm install mysql --save)<br>
 -Nodemon 1.18.10 (npm install nodemon --save)<br>
+-Typescript (npm install typescript --save)<br>
+-Typeorm (npm install typeorm --save)<br>
+-Reflect-metadata (npm install reflect-metadata --save)<br>
+-@types (npm install @types/node --save)<br>
+
+## Compilação do typescript
+para compilar o os arquivos typescrits e gerar apartir deles o java script a seguinte configuração deve ser feita no arquivo package.json<br>
+>"scripts": {<br>
+    "test": "echo \"Error: no test specified\" && exit 1",<br>
+    "compile": "tsc",<br>
+    "start": "tsc -w"<br>
+  }<br>
 
 ## Funcionamento
 - Para execuar a aplicação é necessário ter o node instalado em seu computador.
