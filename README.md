@@ -30,6 +30,7 @@ para compilar o os arquivos typescrits e gerar apartir deles o java script a seg
     "compile": "tsc",<br>
     "start": "tsc -w"<br>
   }<br>
+para compilar execute o comando >npm start<br>
 
 ## Funcionamento
 - Para execuar a aplicação é necessário ter o node instalado em seu computador.
