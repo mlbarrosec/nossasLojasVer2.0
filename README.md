@@ -108,35 +108,14 @@ Endereço: http://localhost:3000/stores/lista
 *E caso queira buscar todas as lojas não passe nada no corpo da requisição<br>
 
 
-## Configuração do Banco de dados
+## Banco de dados
 
-Para este projeto fou utilizado um banco de dados MYSQL de nome "ourStores".
-Para armazenas as informações das lojas no banco de dados foi criada a tabela stores com a seguinte estrutura.
+Nessa versão da aplicação o banco de dados é gerado pelas classes entidades (Store, City e State)
+para isso basta executar a aplicação<br>
 
->id (INT)<br>
-name (VARCHAR)<br>
-adress (VARCHAR)<br>
-phone (VARCHAR)<br>
-cnpj (VARCHAR)<br>
-workingHour (VARCHAR)<br>
-city (VARCHAR)<br>
-state (VARCHAR)<br>
+>nodemon index.js<br>
 
-### Script para criação da tabela stores
-
->CREATE TABLE `stores`(  <br>
-`id` INT(11) NOT NULL AUTO_INCREMENT ,  <br>
-`name` VARCHAR(255) NOT NULL ,  <br>
-`adress` VARCHAR(255) NOT NULL ,  <br>
-`phone` VARCHAR(255) NOT NULL ,  <br>
-`cnpj` VARCHAR(255) NOT NULL ,  <br>
-`workingHour` VARCHAR(255) NOT NULL ,  <br>
-`city` VARCHAR(255) NOT NULL ,  <br>
-`state` VARCHAR(3) NOT NULL ,  <br>
-PRIMARY KEY (`id`))  <br>
-ENGINE = InnoDB; <br>
-
--Atenção: Você pode utilizar o arquivo ourstore.sql, que se encontra na raiz da aplicação, para criar a tabela.
+-Atenção: Você pode utilizar o arquivo ourstore.sql, que se encontra na raiz da aplicação, para popular o banco de dados.
 
 ## Documentação Swagger da Aplicação
 A documentação Swagger da Aplicação está no arquivo <b>"NossasLojas.yaml"</b>
