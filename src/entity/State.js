@@ -10,42 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-//Entidade resposavel pelo banco de dados da loja.
-let Stores = class Stores {
+let State = class State {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Stores.prototype, "id", void 0);
+], State.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 255 }),
+    typeorm_1.Column({ length: 100 }),
     __metadata("design:type", String)
-], Stores.prototype, "name", void 0);
+], State.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column({ length: 255 }),
+    typeorm_1.Column({ length: 100 }),
     __metadata("design:type", String)
-], Stores.prototype, "address", void 0);
-__decorate([
-    typeorm_1.Column({ length: 255 }),
-    __metadata("design:type", String)
-], Stores.prototype, "phone", void 0);
-__decorate([
-    typeorm_1.Column({ length: 255 }),
-    __metadata("design:type", String)
-], Stores.prototype, "cnpj", void 0);
-__decorate([
-    typeorm_1.Column({ length: 255 }),
-    __metadata("design:type", String)
-], Stores.prototype, "workingHour", void 0);
-__decorate([
-    typeorm_1.Column({ length: 255 }),
-    __metadata("design:type", String)
-], Stores.prototype, "city", void 0);
+], State.prototype, "region", void 0);
 __decorate([
     typeorm_1.Column({ length: 3 }),
     __metadata("design:type", String)
-], Stores.prototype, "state", void 0);
-Stores = __decorate([
+], State.prototype, "initials", void 0);
+State = __decorate([
     typeorm_1.Entity()
-], Stores);
-exports.Stores = Stores;
+], State);
+exports.State = State;

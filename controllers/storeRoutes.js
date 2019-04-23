@@ -49,29 +49,9 @@ module.exports = function(app) {
         }
 
         var list = req.body;
-        //Cria a conexão com o banco de dados
-        var connection = app.persistencia.ConnectionConfig();
-        var storeDAO = new app.persistencia.StoreDAO(connection);
 
-        storeDAO.listStores(list,function(error, result){
-            if(error){
-                
-                var saidaErro = {
-                    "errorCode":"500",
-                    "msg":"Internal server error"
-                }  
-                res.status(500).send(saidaErro);
-                console.log(saidaErro);
-
-                return;
-                /*console.log("Error insertion data base " + error);
-                res.status(500).send(error);*/
-            }else{
-                console.log("Store founded");
-                res.send(result);
-                //res.status(201).json(list)
-            }
-        });
+        let connection = new app.src.DataBaseAdmin();
+        connection.listStateCityDb(list,res);       
 
 
     });
@@ -99,37 +79,11 @@ module.exports = function(app) {
 
     // Metodo GET para busca por ID
     app.get("/stores/store/:id", function(req, res){
+
+        var id = req.params.id;
         
-        var id = req.params.id;       
-
-        var connection = app.persistencia.ConnectionConfig();
-        var storeDAO = new app.persistencia.StoreDAO(connection);
-
-        storeDAO.searchForID(id, function(error,result){
-            if(error){
-                var saidaErro = {
-                    "errorCode":"500",
-                    "msg":"Internal server error"
-                }  
-                res.status(500).send(saidaErro);
-                console.log(saidaErro);
-                return;
-            }else{
-                //Caso naõ encontre retorna um erro ao usuário
-                if(result == ""){
-                    let saidaErro = {
-                        "errorCode":"204",
-                        "msg":"Store Found"
-                    }  
-                    res.send(saidaErro);
-                    console.log(saidaErro);                    
-                }else{
-                    console.log('Loja Encontada'+ JSON.stringify(result));
-                    res.send(result);
-                    return;
-                }
-            }
-        })
+        let connection = new app.src.DataBaseAdmin();
+        connection.listStoreIdDb(id,res);
     
     });
 }

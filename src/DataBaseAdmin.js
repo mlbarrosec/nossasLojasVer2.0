@@ -14,7 +14,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const Stores_1 = require("./entity/Stores");
+const City_1 = require("./entity/City");
+const State_1 = require("./entity/State");
 const configs_json_1 = __importDefault(require("./config/configs.json"));
+//Casse reponsavel pela consultas ao bando de dados, usando a API typeorm
+//cria uma constante de conexão como o banco de dados
 const connection = typeorm_1.createConnection({
     type: "mysql",
     host: configs_json_1.default.host,
@@ -23,14 +27,18 @@ const connection = typeorm_1.createConnection({
     password: configs_json_1.default.password,
     database: configs_json_1.default.database,
     entities: [
-        Stores_1.Stores
+        Stores_1.Stores,
+        City_1.City,
+        State_1.State
     ],
     synchronize: true,
 });
 class DataBaseAdmin {
+    //Função reponsavel por fazer a inserção de uma loja no banco
     insertStoreDb(body, res) {
         connection
             .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            //pega os valores das variaveis passa no body da requisição
             let stores = new Stores_1.Stores();
             stores.name = body.name;
             stores.address = body.address;
@@ -39,6 +47,7 @@ class DataBaseAdmin {
             stores.workingHour = body.workingHour;
             stores.city = body.city;
             stores.state = body.state;
+            //salva loja no banco de dados
             return connection.manager
                 .save(stores)
                 .then(stores => {
@@ -46,15 +55,17 @@ class DataBaseAdmin {
                 res.status(200).send(stores);
             });
         })).catch(error => {
+            //Caso algum erro ocorra retorna o erro 
             let saidaErro = {
                 "errorCode": "400",
                 "msg": 'Error connect to database'
             };
             res.status(400).send(saidaErro);
             console.log(error);
-            //return 'error';            
         });
     }
+    //função responsavel por atualizar um registro no banco de dados
+    //usa como parametro um id e o corpo da requisicao
     updateStoreDb(id, body, res) {
         connection
             .then((connection) => __awaiter(this, void 0, void 0, function* () {
@@ -80,6 +91,86 @@ class DataBaseAdmin {
             console.log(error);
         });
     }
+    //função responsavel por buscar um registro atravez de seu id
+    listStoreIdDb(id, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            //usa o get repository, que coloca todos os valores de store em uma variavel
+            //e depois busca nela os registros
+            let allStores = connection.getRepository(Stores_1.Stores);
+            let storeToFind = yield allStores.findOne(id);
+            if (storeToFind != undefined) {
+                console.log('Loja Encontada' + JSON.stringify(storeToFind));
+                res.send(storeToFind);
+            }
+            else {
+                console.log('Nenhuma loja encontrada');
+                res.send("Nenhuma loja encontrada");
+            }
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    //funcao responsavel por listar todas as lojas, por estado e cidades
+    listStateCityDb(body, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            let allStores = connection.getRepository(Stores_1.Stores);
+            let StoresToFind;
+            if (body.state == undefined && body.cityes == undefined) {
+                StoresToFind = yield allStores.findOne();
+                if (StoresToFind != undefined) {
+                    console.log('Loja Encontada' + JSON.stringify(StoresToFind));
+                    res.send(StoresToFind);
+                }
+                else {
+                    console.log('Nenhuma loja encontrada');
+                    res.send("Nenhuma loja encontrada");
+                }
+            }
+            else if (body.state != undefined && body.cityes == undefined) {
+                StoresToFind = yield allStores.find({ state: body.state });
+                if (StoresToFind != undefined) {
+                    console.log('Loja Encontada' + JSON.stringify(StoresToFind));
+                    res.send(StoresToFind);
+                }
+                else {
+                    console.log('Nenhuma loja encontrada');
+                    res.send("Nenhuma loja encontrada");
+                }
+            }
+            else if (body.state != undefined && body.cityes != undefined) {
+                var resArray = [];
+                //percore a lista o array de cidades passadas como parametro 
+                //e coloca as respostas no array resArray
+                for (var i = 0; i < body.cityes.length; i++) {
+                    StoresToFind = yield allStores.find({ state: body.state, city: body.cityes[i] });
+                    resArray.push(StoresToFind);
+                }
+                if (resArray[0] != "") {
+                    console.log('Loja Encontada' + JSON.stringify(StoresToFind));
+                    res.send(resArray);
+                }
+                else {
+                    console.log('Nenhuma loja encontrada');
+                    res.send("Nenhuma loja encontrada");
+                }
+            }
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    //funcao resposavel por deletar um registro da tabela por seu id
     deleteStoreDb(id, res) {
         connection
             .then((connection) => __awaiter(this, void 0, void 0, function* () {

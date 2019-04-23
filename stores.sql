@@ -1,65 +1,57 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: 09-Abr-2019 às 15:22
--- Versão do servidor: 10.1.38-MariaDB
--- versão do PHP: 7.3.2
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+INSERT INTO state (name,region,initials) VALUES ('Rio Grande do Sul', 'Sul','RS');
+INSERT INTO state (name,region,initials) VALUES ('Santa Catarina', 'Sul','SC');
+INSERT INTO state (name,region,initials) VALUES ('Paraná', 'Sul','PR');
 
+INSERT INTO state (name,region,initials) VALUES ('São Paulo', 'Sudeste','SP');
+INSERT INTO state (name,region,initials) VALUES ('Rio de Janeiro', 'Sudeste', 'RJ');
+INSERT INTO state (name,region,initials) VALUES ('Espirito Santo', 'Sudeste', 'ES');
+INSERT INTO state (name,region,initials) VALUES ('Minas Gerais', 'Sudeste', 'MG');
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+INSERT INTO state (name,region,initials) VALUES ('Mato Grosso do Sul', 'Centro Oeste','MS');
+INSERT INTO state (name,region,initials) VALUES ('Mato Grosso', 'Centro Oeste','MT');
+INSERT INTO state (name,region,initials) VALUES ('Goiás', 'Centro Oeste','GO');
+INSERT INTO state (name,region,initials) VALUES ('Distrito Federal', 'Centro Oeste','DF');
 
---
--- Database: `ourstore`
---
+INSERT INTO state (name,region,initials) VALUES ('Rondônia', 'Norte','RO');
+INSERT INTO state (name,region,initials) VALUES ('Acre', 'Norte','AC');
+INSERT INTO state (name,region,initials) VALUES ('Amazonas', 'Norte','AM');
+INSERT INTO state (name,region,initials) VALUES ('Tocantins', 'Norte','TO');
+INSERT INTO state (name,region,initials) VALUES ('Pará', 'Norte','PA');
+INSERT INTO state (name,region,initials) VALUES ('Amapá', 'Norte','AM');
+INSERT INTO state (name,region,initials) VALUES ('Roraima', 'Norte','RR');
 
--- --------------------------------------------------------
+INSERT INTO state (name,region,initials) VALUES ('Maranhão', 'Nordeste','MA');
+INSERT INTO state (name,region,initials) VALUES ('Piauí', 'Nordeste','PI');
+INSERT INTO state (name,region,initials) VALUES ('Ceará', 'Nordeste','Ceará');
+INSERT INTO state (name,region,initials) VALUES ('Rio Grande do Norte', 'Nordeste','RN');
+INSERT INTO state (name,region,initials) VALUES ('Paraiba', 'Nordeste','PB');
+INSERT INTO state (name,region,initials) VALUES ('Pernambuco', 'Nordeste','PE');
+INSERT INTO state (name,region,initials) VALUES ('Bahia', 'Nordeste','BA');
 
---
--- Estrutura da tabela `stores`
---
+INSERT INTO city (stateId,name) VALUES (4,'Rio Grande');
+INSERT INTO city (stateId,name) VALUES (4,'Pelotas');
+INSERT INTO city (stateId,name) VALUES (4,'Porto Alegre');
+INSERT INTO city (stateId,name) VALUES (5,'Florianópolis');
+INSERT INTO city (stateId,name) VALUES (5,'Sombrio');
 
-CREATE TABLE `stores` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `adress` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `cnpj` varchar(255) NOT NULL,
-  `workingHour` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `state` varchar(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja A','Rua ABC','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Rio Grande','RS');
 
---
--- Indexes for dumped tables
---
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja B','Rua TRF','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Pelotas','RS');
 
---
--- Indexes for table `stores`
---
-ALTER TABLE `stores`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja C','Rua EF','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Rio Grande','RS');
 
---
--- AUTO_INCREMENT for dumped tables
---
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja D','Rua LDS','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Bage','RS');
 
---
--- AUTO_INCREMENT for table `stores`
---
-ALTER TABLE `stores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja E','Rua ABC','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Florianópolis','SC');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja F','Rua HM','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Florianópolis','SC');
+
+INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
+  VALUES ('Loja G','Rua AS','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Itajai','SC');

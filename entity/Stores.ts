@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
-
+//Entidade resposavel pelo banco de dados da loja.
 @Entity() 
 export class Stores{
     
