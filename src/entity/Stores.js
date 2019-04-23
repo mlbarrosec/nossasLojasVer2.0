@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const City_1 = require("./City");
 //Entidade resposavel pelo banco de dados da loja.
 let Stores = class Stores {
 };
@@ -38,13 +39,10 @@ __decorate([
     __metadata("design:type", String)
 ], Stores.prototype, "workingHour", void 0);
 __decorate([
-    typeorm_1.Column({ length: 255 }),
-    __metadata("design:type", String)
+    typeorm_1.ManyToOne(type => City_1.City, cityId => cityId.id),
+    typeorm_1.JoinColumn({ name: "cityId" }),
+    __metadata("design:type", City_1.City)
 ], Stores.prototype, "city", void 0);
-__decorate([
-    typeorm_1.Column({ length: 3 }),
-    __metadata("design:type", String)
-], Stores.prototype, "state", void 0);
 Stores = __decorate([
     typeorm_1.Entity()
 ], Stores);

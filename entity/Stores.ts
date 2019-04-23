@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from "typeorm";
+import { City } from "./City";
 //Entidade resposavel pelo banco de dados da loja.
 @Entity() 
 export class Stores{
@@ -21,10 +22,8 @@ export class Stores{
     @Column({length: 255})
     workingHour:string
 
-    @Column({length: 255})
-    city:string
-
-    @Column({length: 3})
-    state:string
+    @ManyToOne(type => City, cityId => cityId.id)
+    @JoinColumn({name: "cityId"})
+    city: City;  
 
 }

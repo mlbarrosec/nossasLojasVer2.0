@@ -16,10 +16,8 @@ module.exports = function(app) {
         req.assert("phone", "O campo telefone deve ser preenchido").notEmpty();
         req.assert("cnpj","O campo CNPJ deve ser preenchido").notEmpty();
         req.assert("workingHour","O campo horário de funcionamento deve ser preenchido").notEmpty();
-        req.assert("city", "A campo cidade deve ser preenchido").notEmpty();
-        req.assert("state", "O campo state tem que ser preenchido").notEmpty();
+        req.assert("cityId", "O campo cidade deve ser preenchido").notEmpty();
 
-        
         var errors = req.validationErrors();
         if(errors) {
             let saidaErro = {
@@ -34,8 +32,7 @@ module.exports = function(app) {
         var store = req.body;
 
         var connection = new app.src.DataBaseAdmin();
-        connection.insertStoreDb(store, res);     
-       
+        connection.insertStoreDb(store, res);       
 
     });
 

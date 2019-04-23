@@ -45,8 +45,8 @@ class DataBaseAdmin {
             stores.phone = body.phone;
             stores.cnpj = body.cnpj;
             stores.workingHour = body.workingHour;
-            stores.city = body.city;
-            stores.state = body.state;
+            stores.city = body.cityId;
+            //stores.state = body.state;        
             //salva loja no banco de dados
             return connection.manager
                 .save(stores)
@@ -77,8 +77,8 @@ class DataBaseAdmin {
             storeToAtualize.phone = body.phone;
             storeToAtualize.cnpj = body.cnpj;
             storeToAtualize.workingHour = body.workingHour;
-            storeToAtualize.city = body.city;
-            storeToAtualize.state = body.state;
+            storeToAtualize.city = body.cityId;
+            //storeToAtualize.state = body.state;
             yield allStores.save(storeToAtualize);
             console.log("Loja atualizada com sucesso");
             res.status(200).send(storeToAtualize);
@@ -120,10 +120,11 @@ class DataBaseAdmin {
     listStateCityDb(body, res) {
         connection
             .then((connection) => __awaiter(this, void 0, void 0, function* () {
-            let allStores = connection.getRepository(Stores_1.Stores);
-            let StoresToFind;
             if (body.state == undefined && body.cityes == undefined) {
-                StoresToFind = yield allStores.findOne();
+                let StoresToFind = yield connection.createQueryBuilder(Stores_1.Stores, "stores")
+                    .innerJoin("stores.city", "city")
+                    .innerJoin("city.state", "state")
+                    .getMany();
                 if (StoresToFind != undefined) {
                     console.log('Loja Encontada' + JSON.stringify(StoresToFind));
                     res.send(StoresToFind);
@@ -134,7 +135,11 @@ class DataBaseAdmin {
                 }
             }
             else if (body.state != undefined && body.cityes == undefined) {
-                StoresToFind = yield allStores.find({ state: body.state });
+                let StoresToFind = yield connection.createQueryBuilder(Stores_1.Stores, "stores")
+                    .innerJoin("stores.city", "city")
+                    .innerJoin("city.state", "state")
+                    .where("state.initials in (:state)", { state: body.state })
+                    .getMany();
                 if (StoresToFind != undefined) {
                     console.log('Loja Encontada' + JSON.stringify(StoresToFind));
                     res.send(StoresToFind);
@@ -145,16 +150,14 @@ class DataBaseAdmin {
                 }
             }
             else if (body.state != undefined && body.cityes != undefined) {
-                var resArray = [];
-                //percore a lista o array de cidades passadas como parametro 
-                //e coloca as respostas no array resArray
-                for (var i = 0; i < body.cityes.length; i++) {
-                    StoresToFind = yield allStores.find({ state: body.state, city: body.cityes[i] });
-                    resArray.push(StoresToFind);
-                }
-                if (resArray[0] != "") {
+                let StoresToFind = yield connection.createQueryBuilder(Stores_1.Stores, "stores")
+                    .innerJoin("stores.city", "city")
+                    .innerJoin("city.state", "state")
+                    .where("city.name in (:city) and state.initials in (:state)", { city: body.cityes, state: body.state })
+                    .getMany();
+                if (StoresToFind != undefined) {
                     console.log('Loja Encontada' + JSON.stringify(StoresToFind));
-                    res.send(resArray);
+                    res.send(StoresToFind);
                 }
                 else {
                     console.log('Nenhuma loja encontrada');

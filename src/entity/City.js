@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const State_1 = require("./State");
 let City = class City {
 };
 __decorate([
@@ -21,9 +22,10 @@ __decorate([
     __metadata("design:type", String)
 ], City.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
-], City.prototype, "stateId", void 0);
+    typeorm_1.ManyToOne(type => State_1.State, stateId => stateId.id),
+    typeorm_1.JoinColumn({ name: "stateId" }),
+    __metadata("design:type", State_1.State)
+], City.prototype, "state", void 0);
 City = __decorate([
     typeorm_1.Entity()
 ], City);

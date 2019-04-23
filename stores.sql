@@ -29,29 +29,29 @@ INSERT INTO state (name,region,initials) VALUES ('Paraiba', 'Nordeste','PB');
 INSERT INTO state (name,region,initials) VALUES ('Pernambuco', 'Nordeste','PE');
 INSERT INTO state (name,region,initials) VALUES ('Bahia', 'Nordeste','BA');
 
-INSERT INTO city (stateId,name) VALUES (4,'Rio Grande');
-INSERT INTO city (stateId,name) VALUES (4,'Pelotas');
-INSERT INTO city (stateId,name) VALUES (4,'Porto Alegre');
-INSERT INTO city (stateId,name) VALUES (5,'Florianópolis');
-INSERT INTO city (stateId,name) VALUES (5,'Sombrio');
+INSERT INTO city (name,stateId) VALUES ('Rio Grande',4);
+INSERT INTO city (name,stateId) VALUES ('Pelotas',4);
+INSERT INTO city (name,stateId) VALUES ('Porto Alegre',4);
+INSERT INTO city (name,stateId) VALUES ('Florianópolis',5);
+INSERT INTO city (name,stateId) VALUES ('Sombrio',5);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja A','Rua ABC','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Rio Grande','RS');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja A','Rua ABC','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',1);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja B','Rua TRF','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Pelotas','RS');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja B','Rua TRF','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',2);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja C','Rua EF','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Rio Grande','RS');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja C','Rua EF','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',1);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja D','Rua LDS','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Bage','RS');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja D','Rua LDS','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',3);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja E','Rua ABC','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Florianópolis','SC');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja E','Rua ABC','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',4);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja F','Rua HM','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Florianópolis','SC');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja F','Rua HM','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',4);
 
-INSERT INTO stores (name,address,phone,cnpj,workingHour,city,state)
-  VALUES ('Loja G','Rua AS','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs','Itajai','SC');
+INSERT INTO stores (name,address,phone,cnpj,workingHour,cityId)
+  VALUES ('Loja G','Rua AS','(00) 0000-0000','00.000.000/0000-00','Diariamente das 11hs às 23hs',5);

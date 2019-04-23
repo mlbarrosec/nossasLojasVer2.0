@@ -1,4 +1,4 @@
-import {Entity,Column,PrimaryGeneratedColumn,OneToOne,JoinColumn} from "typeorm"
+import {Entity,Column,PrimaryGeneratedColumn,OneToOne,JoinColumn, ManyToOne} from "typeorm"
 import {State} from "./State";
 
 @Entity()
@@ -8,10 +8,9 @@ export class City{
     id:number
 
     @Column({length:100})
-    nome:string;
+    name:string;
 
-    @Column({length:3})
-    stateId:number
-
-
+    @ManyToOne(type => State, stateId => stateId.id)
+    @JoinColumn({name: "stateId"})
+    state: State;
 }
