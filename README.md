@@ -23,6 +23,7 @@ Pelo prompt do node, você deve estar localizado na pasta local da sua aplicaç�
 -Reflect-metadata (npm install reflect-metadata --save)<br>
 -@types (npm install @types/node --save)<br>
 -Jest (npm install --save-dev jest)
+-Babel (npm install --save-dev babel-cli babel-preset-env jest supertest superagent)
 
 ## Compilação do typescript
 para compilar o os arquivos typescrits e gerar apartir deles o java script a seguinte configuração deve ser feita no arquivo package.json<br>
