@@ -30,6 +30,11 @@
     "typeorm": "^0.2.16"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^24.7.1",
+    "superagent": "^5.0.2",
+    "supertest": "^4.0.2",
     "typescript": "^3.4.3"
   }
 }
