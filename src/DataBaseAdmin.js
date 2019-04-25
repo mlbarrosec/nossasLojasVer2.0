@@ -34,6 +34,7 @@ const connection = typeorm_1.createConnection({
     synchronize: true,
 });
 class DataBaseAdmin {
+    /*<---- SAVES IN DATABASES ------>*/
     //Função reponsavel por fazer a inserção de uma loja no banco
     insertStoreDb(body, res) {
         connection
@@ -46,7 +47,7 @@ class DataBaseAdmin {
             stores.cnpj = body.cnpj;
             stores.workingHour = body.workingHour;
             stores.city = body.cityId;
-            //stores.state = body.state;        
+            //stores.state = body.state;
             //salva loja no banco de dados
             return connection.manager
                 .save(stores)
@@ -64,6 +65,28 @@ class DataBaseAdmin {
             console.log(error);
         });
     }
+    insertCityDb(body, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            let city = new City_1.City();
+            city.name = body.cityName;
+            city.state = body.stateId;
+            return connection.manager
+                .save(city)
+                .then(city => {
+                console.log("Cidade salva com sucesso", city.id);
+                res.status(200).send(city);
+            });
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    /*<---- UPDATES IN DATABASES ------>*/
     //função responsavel por atualizar um registro no banco de dados
     //usa como parametro um id e o corpo da requisicao
     updateStoreDb(id, body, res) {
@@ -78,10 +101,85 @@ class DataBaseAdmin {
             storeToAtualize.cnpj = body.cnpj;
             storeToAtualize.workingHour = body.workingHour;
             storeToAtualize.city = body.cityId;
-            //storeToAtualize.state = body.state;
             yield allStores.save(storeToAtualize);
             console.log("Loja atualizada com sucesso");
             res.status(200).send(storeToAtualize);
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    updateCityDb(id, body, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            //coloca todas as lojas na variavel allStores
+            let allCityes = connection.getRepository(City_1.City);
+            let cityToAtualize = yield allCityes.findOne(id);
+            cityToAtualize.name = body.cityName;
+            yield allCityes.save(cityToAtualize);
+            console.log("Cidade atualizada com sucesso");
+            res.status(200).send(cityToAtualize);
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    updateStateDb(id, body, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            //coloca todas as lojas na variavel allStores
+            let allStates = connection.getRepository(State_1.State);
+            let statesToAtualize = yield allStates.findOne(id);
+            statesToAtualize.name = body.name;
+            statesToAtualize.region = body.region;
+            statesToAtualize.initials = body.initials;
+            yield allStates.save(statesToAtualize);
+            console.log("Estado atualizada com sucesso");
+            res.status(200).send(statesToAtualize);
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    /*<---- DELETES IN DATABASES ------>*/
+    //funcao resposavel por deletar um registro da tabela por seu id
+    deleteStoreDb(id, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            let allStores = connection.getRepository(Stores_1.Stores);
+            let storeToRemove = yield allStores.findOne(id);
+            yield allStores.remove(storeToRemove);
+            console.log("Loja Excluida com sucesso");
+            res.status(200).send("Loja excluida com sucesso: " + id);
+        })).catch(error => {
+            let saidaErro = {
+                "errorCode": "400",
+                "msg": 'Error connect to database'
+            };
+            res.status(400).send(saidaErro);
+            console.log(error);
+        });
+    }
+    deleteCityDb(id, res) {
+        connection
+            .then((connection) => __awaiter(this, void 0, void 0, function* () {
+            let allCityes = connection.getRepository(City_1.City);
+            let cityToRemove = yield allCityes.findOne(id);
+            yield allCityes.remove(cityToRemove);
+            console.log("Loja Excluida com sucesso");
+            res.status(200).send("Cidade excluida com sucesso: " + id);
         })).catch(error => {
             let saidaErro = {
                 "errorCode": "400",
@@ -164,24 +262,6 @@ class DataBaseAdmin {
                     res.send("Nenhuma loja encontrada");
                 }
             }
-        })).catch(error => {
-            let saidaErro = {
-                "errorCode": "400",
-                "msg": 'Error connect to database'
-            };
-            res.status(400).send(saidaErro);
-            console.log(error);
-        });
-    }
-    //funcao resposavel por deletar um registro da tabela por seu id
-    deleteStoreDb(id, res) {
-        connection
-            .then((connection) => __awaiter(this, void 0, void 0, function* () {
-            let allStores = connection.getRepository(Stores_1.Stores);
-            let storeToRemove = yield allStores.findOne(id);
-            yield allStores.remove(storeToRemove);
-            console.log("Loja Excluida com sucesso");
-            res.status(200).send("Loja excluida com sucesso: " + id);
         })).catch(error => {
             let saidaErro = {
                 "errorCode": "400",

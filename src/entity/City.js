@@ -22,7 +22,7 @@ __decorate([
     __metadata("design:type", String)
 ], City.prototype, "name", void 0);
 __decorate([
-    typeorm_1.ManyToOne(type => State_1.State, stateId => stateId.id),
+    typeorm_1.ManyToOne(type => State_1.State, stateId => stateId.id, { onDelete: 'CASCADE' }),
     typeorm_1.JoinColumn({ name: "stateId" }),
     __metadata("design:type", State_1.State)
 ], City.prototype, "state", void 0);
