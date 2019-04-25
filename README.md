@@ -44,6 +44,9 @@ seu servidor estará rodando caso apareça no console o aviso "servidor rodando 
 - Para testar as requisições é remondavel que use o puglin do postmam para o chrome
 o mesmo se encontra para download em: https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
 
+## Coleção Postmann
+- O Arquivo "API REST.postman_collection" contém coleção de requisições utilizadas no sistema, você pode importar ela pelo postmann.
+
 #### -POST (cadastra elemento loja no banco de dados)
 
 Para utilizar o metodo POST você deve executar a seguinte requisição no postman
