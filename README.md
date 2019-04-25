@@ -22,6 +22,7 @@ Pelo prompt do node, você deve estar localizado na pasta local da sua aplicaç�
 -Typeorm (npm install typeorm --save)<br>
 -Reflect-metadata (npm install reflect-metadata --save)<br>
 -@types (npm install @types/node --save)<br>
+-Jest (npm install --save-dev jest)
 
 ## Compilação do typescript
 para compilar o os arquivos typescrits e gerar apartir deles o java script a seguinte configuração deve ser feita no arquivo package.json<br>
