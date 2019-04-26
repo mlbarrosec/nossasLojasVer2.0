@@ -89,7 +89,6 @@ export class DataBaseAdmin{
             });
     }
 
-
     /*<---- UPDATES IN DATABASES ------>*/
 
     //função responsavel por atualizar um registro no banco de dados
@@ -199,7 +198,6 @@ export class DataBaseAdmin{
                 console.log(error);
             });
     }
-
     
     //função responsavel por buscar um registro atravez de seu id
     listStoreIdDb(id:number,res:any){

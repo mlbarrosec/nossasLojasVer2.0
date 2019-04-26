@@ -1,4 +1,4 @@
-//DEfinição de rotas
+//Definição de rotas
 
 module.exports = function(app) {
     
@@ -30,7 +30,6 @@ module.exports = function(app) {
         }
         
         let store = req.body;
-
         let connection = new app.src.DataBaseAdmin();
         connection.insertStoreDb(store, res);       
 
@@ -58,13 +57,12 @@ module.exports = function(app) {
         connection.insertCityDb(city,res);
     });
     
-    /* <-- METODOS PUT para atualizartabelas --> */
-    
+    /* <-- METODOS PUT para atualizar tabelas --> */ 
+
     // Metodo PUT para atualizar as cidades do banco
     app.put("/stores/city/:id", function(req,res){
         let city = req.body;       
-        let id = req.params.id;
-        //store.id = id;
+        let id = req.params.id;        
 
         let connection = new app.src.DataBaseAdmin();
         connection.updateCityDb(id,city, res);
@@ -75,7 +73,6 @@ module.exports = function(app) {
     app.put("/stores/store/:id", function(req,res){
         let store = req.body;       
         let id = req.params.id;
-        //store.id = id;
 
         let connection = new app.src.DataBaseAdmin();
         connection.updateStoreDb(id,store, res);
@@ -95,15 +92,13 @@ module.exports = function(app) {
     /*<-- METODOS DE DELETE --> */
 
     //Metodo para deletar loja por ID
-    app.delete("/stores/store/:id", function (req,res){
-        //let store = {}
-        //Pega o ID do parametro da requisição
-        let id = req.params.id;
-        //store.id = id;
+    app.delete("/stores/store/:id", function (req,res){        
+        let id = req.params.id;        
         let connection = new app.src.DataBaseAdmin();
         connection.deleteStoreDb(id,res);
     });
     
+
     
     // Metodo GET para busca por ID
     app.get("/stores/store/:id", function(req, res){
@@ -117,7 +112,6 @@ module.exports = function(app) {
 
     //Lista estado e cidades
     app.post('/stores/lista', function (req, res){
-
         var errors = req.validationErrors();
         if(errors) {
             console.log("Erros de validação encontrados");
