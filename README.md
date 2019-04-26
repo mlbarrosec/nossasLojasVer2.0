@@ -27,11 +27,11 @@ Pelo prompt do node, você deve estar localizado na pasta local da sua aplicaç�
 
 ## Compilação do typescript
 para compilar o os arquivos typescrits e gerar apartir deles o java script a seguinte configuração deve ser feita no arquivo package.json<br>
->"scripts": {<br>
-    "test": "echo \"Error: no test specified\" && exit 1",<br>
-    "compile": "tsc",<br>
-    "start": "tsc -w"<br>
-  }<br>
+>"scripts": { <br>
+    "test": "jest", <br>
+    "compile": "tsc", <br>
+    "start": "tsc -w" <br>
+  }<br><br>
 
 Para compilar execute o comando<br> 
 >npm start<br>
@@ -48,6 +48,10 @@ o mesmo se encontra para download em: https://chrome.google.com/webstore/detail/
 
 ## Coleção Postmann
 - O Arquivo "API REST.postman_collection" contém coleção de requisições utilizadas no sistema, você pode importar ela pelo postmann.
+
+## Teste das Rotas com JEST
+- Na pasta test contem o arquivo que testa as requisições ao banco de dados, para executar o teste execute o comando:
+>npm test
 
 #### -POST (cadastra elemento loja no banco de dados)
 
